@@ -191,7 +191,7 @@ void comFields(int* row, int* column, char Field[][3]) {
 			*column = 3;
 			return;
 		}
-		if (OppInMiddleSpot(Field) && Field[1][1] == 'O') {
+		if (OppInMiddleSpot(Field) && Field[1][1] == 'O' && (Field[1][0] == ' ' || Field[0][1] == ' ')) {
 			if (Field[1][0] == 'X') {
 				*row = 1;
 				*column = 2;
@@ -203,12 +203,12 @@ void comFields(int* row, int* column, char Field[][3]) {
 				return;
 			}
 		}
-		if (OppInMiddleSpot(Field) && Field[1][1] == ' ') {
+		if (OppInMiddleSpot(Field) && Field[1][1] == ' ' && Field[2][0] == ' ') {
 			*row = 2;
 			*column = 2;
 			return;
 		}
-		if (OppInCornerDiagonal(Field)&&Field[2][0]=='O') {
+		if (OppInCornerDiagonal(Field) && Field[2][0] == 'O' && Field[0][2] == ' ') {
 			*row = 1;
 			*column = 3;
 			return;
@@ -223,6 +223,11 @@ void comFields(int* row, int* column, char Field[][3]) {
 		if (OneFieldPlayed(Field) && Field[1][1] == ' ') {
 			*row = 2;
 			*column = 2;
+			return;
+		}
+		if (OneFieldPlayed(Field) && Field[1][1] == 'X') {
+			*row = 1;
+			*column = 1;
 			return;
 		}
 		if (OnlyFullDiagonal(Field)) {
@@ -240,7 +245,7 @@ void comFields(int* row, int* column, char Field[][3]) {
 			return;
 		}
 	}
-	
+
 }
 
 void playerFields(int* row, int* column, char Field[][3]) {
